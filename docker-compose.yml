@@ -5,6 +5,21 @@ services:
     build: .
     command: npm start
     ports:
-      - "3000:3000"
+      - "$NODE_DOCKER_PORT:$NODE_DOCKER_PORT"
     volumes:
       - .:/usr/app
+  
+  db:
+    container_name: database-mysql
+    image: mysql:5.7.31
+    # command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER --explicit_defaults_for_timestamp
+    restart: always
+    ports: 
+      - '$DB_DOCKER_PORT:$DB_DOCKER_PORT'
+    environment: 
+      - DB_HOST=$DB_HOST
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+      - DB_PORT=$DB_PORT
+      - TZ=America/Sao_Paulo
