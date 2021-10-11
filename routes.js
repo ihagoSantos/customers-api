@@ -1,11 +1,7 @@
 const { Router } = require('express');
-const Cliente = require('./src/cliente/entity/cliente');
+const ClienteController = require('./src/api/controllers/clienteController');
 const routes = new Router();
 
-routes.get('/', (req, res) => {
-    let cliente = new Cliente('nomeCompleto', 'sexo', 'dataNascimento', 'idade', 'cidade');
-
-    res.send({ cliente });
-});
+routes.post('/cliente', ClienteController.create);
 
 module.exports = routes;

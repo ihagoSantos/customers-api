@@ -6,12 +6,17 @@ class App
     constructor()
     {
         this.server = express();
-        this.routes();
+        this.useJson();
+        this.useRoutes();
     }
 
-    routes()
+    useRoutes()
     {
         this.server.use(routes);
+    }
+
+    useJson(){
+        this.server.use(express.json());
     }
 }
 
