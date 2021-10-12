@@ -380,7 +380,7 @@
         "estado"
       ]
     },
-    "ApiResponse": {
+    "ApiResponseError": {
       "type": "object",
       "properties": {
         "name": {
@@ -388,11 +388,11 @@
           "properties": {
             "field": {
               "type": "string",
-              "example": "Garanhuns"
+              "example": "TypeError"
             },
             "type": {
               "type": "string",
-              "example": "int32"
+              "example": "string"
             }
           }
         },
@@ -401,20 +401,7 @@
           "properties": {
             "field": {
               "type": "string",
-              "example": "Pernambuco"
-            },
-            "type": {
-              "type": "string",
-              "example": "string"
-            }
-          }
-        },
-        "code": {
-          "type": "object",
-          "properties": {
-            "field": {
-              "type": "string",
-              "example": "Pernambuco"
+              "example": "Erro ao cadastrar Cliente"
             },
             "type": {
               "type": "string",
@@ -423,6 +410,48 @@
           }
         }
       }
+    },
+    "ApiResponseSuccess": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Teste 2"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "São Paulo 2"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2021-10-12T19:47:47.374Z"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2021-10-12T19:47:47.374Z"
+                }
+              }
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "data"
+      ]
     }
   }
 }

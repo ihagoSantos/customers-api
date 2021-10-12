@@ -15,6 +15,7 @@ module.exports = {
         erroCadastrarCliente: "Erro ao cadastrar cliente",
         idNaoInformado: "O parametro 'id' deve ser informado",
         idDeveSerInteiro: "O parametro 'id' do cliente deve ser um inteiro",
+        cidadeIdDeveSerInteiro: "O parametro 'cidadeId' do cliente deve ser um inteiro",
         clienteNaoEncontrado: "Cliente não encontrado",
     }
 }

@@ -116,10 +116,24 @@ describe('Teste da classe ClienteValidator', function(){
                 clienteValidator.validarId();
             }, expected);
         });
-        it('deve retornar TypeError quando o parametro id for diferente de inteiro inteiro', function(){
+        it('deve retornar TypeError quando o parametro id for diferente de inteiro', function(){
             const expected = TypeError;
             assert.throws(function(){
                 clienteValidator.validarId(params.texto);
+            }, expected);
+        });
+    });
+    describe('Teste da função validarCidadeId()', function(){        
+        it('deve retornar TypeError quando o parametro cidadeId não for informado', function(){
+            const expected = TypeError;
+            assert.throws(function(){
+                clienteValidator.validarCidadeId();
+            }, expected);
+        });
+        it('deve retornar TypeError quando o parametro cidadeId for diferente de inteiro', function(){
+            const expected = TypeError;
+            assert.throws(function(){
+                clienteValidator.validarCidadeId(params.texto);
             }, expected);
         });
     });

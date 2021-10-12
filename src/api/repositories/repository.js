@@ -16,9 +16,9 @@ class Repository {
         });
     }
 
-    async find(where){
+    async find(queryOptions){
         return new Promise((resolve, reject) => {
-            this.model.findOne({ where })
+            this.model.findOne(queryOptions)
                 .then(callback => {
                     resolve(callback);
                 })
@@ -26,9 +26,9 @@ class Repository {
         });
     }
 
-    async findAll(where){
+    async findAll(queryOptions){
         return new Promise((resolve, reject) => {
-            this.model.findAll({ where })
+            this.model.findAll(queryOptions)
                 .then(callback => {
                     resolve(callback);
                 })

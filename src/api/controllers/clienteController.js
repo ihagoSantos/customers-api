@@ -3,6 +3,8 @@ const ClienteService = require('../services/clienteService');
 const errorHelper = require('../../helpers/errorHelper');
 const clienteConstants = require('../../constants/clienteConstants');
 const Cidade = require('../models/cidade/cidade');
+const queryOptionsHelper = require('../../helpers/queryOptionsHelper');
+const { Op } = require("sequelize");
 class ClienteController 
 {
     async create(req, res)
@@ -40,7 +42,12 @@ class ClienteController
         // #swagger.summary = 'Endpoint responsável pela busca do cliente pelo nome'
         try {
             const nome = req.params.nome;
-            const response = await ClienteService.findByName(nome);
+            const where = {
+                nomeCompleto: {
+                    [Op.substring]: nome,
+                }
+            }
+            const response = await ClienteService.findByName(queryOptionsHelper.getQueryOptions(where, Cidade));
             res.status(200).json({ data: response });
         } catch (e) {
             console.error("Error", e);

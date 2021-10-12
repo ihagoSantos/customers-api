@@ -2,6 +2,7 @@ const Cidade = require('../models/cidade/cidadeModel');
 const CidadeService = require('../services/cidadeService');
 const errorHelper = require('../../helpers/errorHelper');
 const cidadeConstants = require('../../constants/cidadeConstants');
+const { Op } = require("sequelize");
 class CidadeController {
     async create(req, res){
         // #swagger.tags = ['Cidade']
@@ -12,7 +13,7 @@ class CidadeController {
             const response = await CidadeService.create(cidade);
             res.status(200).json({ message: cidadeConstants.success.cidadeCadastradaSucesso, data: response });
         } catch (e) {
-            console.error("Error", e);
+            e.message = cidadeConstants.error.erroCadastrarCidade;
             const error = errorHelper.retornaErroFormatado(e);
             res.status(error.code || 500).json({ error });
         }
@@ -22,7 +23,12 @@ class CidadeController {
         // #swagger.summary = 'Endpoint responsável pela busca da cidade pelo nome'
         try {
             const nome = req.params.nome;
-            const response = await CidadeService.findByName(nome);
+            const where = {
+                nome: {
+                    [Op.substring]: nome,
+                }
+            }
+            const response = await CidadeService.findByName(where);
             res.status(200).json({ data: response });
         } catch (e) {
             console.error("Error", e);

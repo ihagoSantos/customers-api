@@ -1,21 +1,27 @@
 const clienteValidator = require('../validators/clienteValidator');
-const cidadeValidator = require('../validators/cidadeValidator');
 const ClienteRepository = require('../repositories/clienteRepository');
-const CidadeRepository = require('../repositories/cidadeRepository');
-const { Op } = require("sequelize");
 const clienteConstants = require('../../constants/clienteConstants');
 const cidadeConstants = require('../../constants/cidadeConstants');
 const errorHelper = require('../../helpers/errorHelper');
-class ClienteService {
+const queryOptionsHelper = require('../../helpers/queryOptionsHelper');
+const Cliente = require('../models/cliente/cliente');
+const Cidade = require('../models/cidade/cidade');
+const Repository = require('../repositories/repository');
+const Service = require('./service');
+const clienteRepository = require('../repositories/clienteRepository');
+class ClienteService extends Service {
     
-    constructor(){}
+    constructor(model){
+        super(new Repository(model), clienteValidator);
+    }
 
     create(cliente){
         
-        clienteValidator.validarCliente(cliente);
+        this.validator.validarCliente(cliente);
 
         return new Promise((resolve, reject) => {
-            CidadeRepository.find(cliente.cidadeId)
+            const where = { where: cliente.cidadeId };
+            this.repository.find(where)
                 .then(cidade => {
                     if(cidade){
                         const cidadeId = cidade.dataValues.id;
@@ -33,36 +39,22 @@ class ClienteService {
     }
 
     findById(id){
-        clienteValidator.validarId(id);
+        this.validator.validarId(id);
         return new Promise((resolve, reject) => {
             const where = { id };
-            ClienteRepository.find(where)
+            this.repository.find(queryOptionsHelper.getQueryOptions(where, Cidade))
                 .then(callback => resolve(callback))
                 .catch(error => reject(error));
         });
     }
-    findByName(nome){
-        
-        return new Promise((resolve, reject) => {
-            const where = {
-                nomeCompleto: {
-                    [Op.substring]: nome,
-                }
-            }
-            ClienteRepository.findAll(where)
-                .then(callback => resolve(callback))
-                .catch(error => reject(error));
-        });
-    }
-
     editName(id, nomeCompleto){
-        clienteValidator.validarId(id);
-        clienteValidator.validarNomeCompleto(nomeCompleto);
+        this.validator.validarId(id);
+        this.validator.validarNomeCompleto(nomeCompleto);
 
         return new Promise((resolve, reject) => {
             const data = { nomeCompleto };
             const where = { id };
-            ClienteRepository.edit(data, where)
+            clienteRepository.edit(data, where)
                 .then(callback => {
                     const status = callback[0];
                     if(!status){
@@ -75,10 +67,10 @@ class ClienteService {
     }
 
     delete(id){
-        clienteValidator.validarId(id);
+        this.validator.validarId(id);
         return new Promise((resolve, reject) => {
             const where = { id };
-            ClienteRepository.delete(where)
+            clienteRepository.delete(where)
                 .then(callback => {
                     if(!callback){
                         reject(errorHelper.notFoundError(clienteConstants.error.clienteNaoEncontrado));
@@ -89,6 +81,7 @@ class ClienteService {
         });
     }
 
+    
 }
 
-module.exports = new ClienteService();
+module.exports = new ClienteService(Cliente);

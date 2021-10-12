@@ -13,6 +13,7 @@ class ClienteValidator extends Validator {
         this.validarSexo(cliente.sexo);
         this.validarDataNascimento(cliente.dataNascimento);
         this.validarIdade(cliente.idade);
+        this.validarCidadeId(cliente.cidadeId)
     }
 
     validarNomeCompleto(nomeCompleto){        
@@ -71,6 +72,12 @@ class ClienteValidator extends Validator {
             throw new TypeError(clienteConstants.error.idDeveSerInteiro);
         if(!this.isValidInteger(id))
             throw new TypeError(clienteConstants.error.idDeveSerInteiro);
+    }
+    validarCidadeId(cidadeId){
+        if(!cidadeId)
+            throw new TypeError(clienteConstants.error.cidadeIdDeveSerInteiro);
+        if(!this.isValidInteger(cidadeId))
+            throw new TypeError(clienteConstants.error.cidadeIdDeveSerInteiro);
     }
 }
 

@@ -1,37 +1,12 @@
 const cidadeValidator = require('../validators/cidadeValidator');
-const CidadeRepository = require('../repositories/cidadeRepository');
-const cidadeConstants = require('../../constants/cidadeConstants');
 const { Op } = require("sequelize");
-class ClienteService {
+const Cidade = require('../models/cidade/cidade');
+const Repository = require('../repositories/repository');
+const Service = require('./service');
+class CidadeService extends Service {
     
-    constructor(){}
-
-    create(cidade){
-        cidadeValidator.validarCidade(cidade);
-        return new Promise((resolve, reject) => {
-            CidadeRepository.create(cidade)
-                .then(callback => {
-                    
-                    resolve(callback)
-                })
-                .catch(error => {
-                    console.log(error)
-                    reject(new Error(cidadeConstants.error.erroCadastrarCidade))
-                });
-        });
-    }
-
-    findByName(nome){
-        return new Promise((resolve, reject) => {
-            const where = {
-                nome: {
-                    [Op.substring]: nome,
-                }
-            }
-            CidadeRepository.findAll(where)
-                .then(callback => resolve(callback))
-                .catch(error => reject(error));
-        });
+    constructor(model){
+        super(new Repository(model), cidadeValidator);
     }
 
     findByState(estado){
@@ -41,45 +16,13 @@ class ClienteService {
                     [Op.substring]: estado,
                 }
             }
-            CidadeRepository.findAll(where)
+
+            this.repository.findAll(where)
                 .then(callback => resolve(callback))
                 .catch(error => reject(error));
         });
     }
-    editName(id, nomeCompleto){
-        // clienteValidator.validarId(id);
-        // clienteValidator.validarNomeCompleto(nomeCompleto);
-
-        // return new Promise((resolve, reject) => {
-        //     const data = { nomeCompleto };
-        //     const where = { id };
-        //     ClienteRepository.edit(data, where)
-        //         .then(callback => {
-        //             const status = callback[0];
-        //             if(!status){
-        //                 reject(errorHelper.notFoundError(clienteConstants.error.clienteNaoEncontrado));
-        //             }
-        //             resolve( this.findById(id) );
-        //         })
-        //         .catch(error => reject(error));
-        // });
-    }
-
-    delete(id){
-        // clienteValidator.validarId(id);
-        // return new Promise((resolve, reject) => {
-        //     const where = { id };
-        //     ClienteRepository.delete(where)
-        //         .then(callback => {
-        //             if(!callback){
-        //                 reject(errorHelper.notFoundError(clienteConstants.error.clienteNaoEncontrado));
-        //             }
-        //             resolve();
-        //         })
-        //         .catch(error => reject(error));
-        // });
-    }
 
 }
 
-module.exports = new ClienteService();
+module.exports = new CidadeService(Cidade);

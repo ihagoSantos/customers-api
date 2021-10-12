@@ -58,19 +58,27 @@ const doc = {
                 type: "string",
             },
         },
-        ApiResponse: {
+        ApiResponseError: {
             name: {
-                field: "Garanhuns",
-                type: "int32",
+                field: "TypeError",
+                type: "string",
             },
             message: {
-                field: "Pernambuco",
+                field: "Erro ao cadastrar Cliente",
                 type: "string",
             },
-            code: {
-                field: "Pernambuco",
+        },
+        ApiResponseSuccess: {
+            $data: {
+                field: {
+                    id: 12,
+                    nome: "Teste 2",
+                    estado: "São Paulo 2",
+                    updatedAt: "2021-10-12T19:47:47.374Z",
+                    createdAt: "2021-10-12T19:47:47.374Z"
+                },
                 type: "string",
-            },
+            }
         }
     }
 };
