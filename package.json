@@ -1,0 +1,35 @@
+{
+  "name": "customers-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./src/tests",
+    "start": "nodemon -L server.js",
+    "swagger-autogen": "node swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihagoSantos/customers-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ihagoSantos/customers-api/issues"
+  },
+  "homepage": "https://github.com/ihagoSantos/customers-api#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
+    "sequelize": "^6.7.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.2",
+    "supertest": "^6.1.6",
+    "swagger-autogen": "^2.11.2"
+  }
+}

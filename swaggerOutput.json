@@ -1,0 +1,457 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "customers-api",
+    "description": "API utilizada para realizar cadastro de clientes e cidades"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Cliente",
+      "description": "Endpoints para manipulação de clientes"
+    },
+    {
+      "name": "Cidade",
+      "description": "Endpoints para manipulação de cidades"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/customers/getById/{id}": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Endpoint responsável pela busca do cliente pelo ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/customers/getByName/{nome}": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Endpoint responsável pela busca do cliente pelo nome",
+        "description": "",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Endpoint responsável pela criação de um cliente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeCompleto": {
+                  "example": "any"
+                },
+                "sexo": {
+                  "example": "any"
+                },
+                "dataNascimento": {
+                  "example": "any"
+                },
+                "idade": {
+                  "example": "any"
+                },
+                "cidadeId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/customers/editName/{id}": {
+      "patch": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Endpoint responsável pela edição do nome do cliente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "delete": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Endpoint responsável pela exclusão do cliente pelo id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/cities/getByName/{nome}": {
+      "get": {
+        "tags": [
+          "Cidade"
+        ],
+        "summary": "Endpoint responsável pela busca da cidade pelo nome",
+        "description": "",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/cities/getByState/{estado}": {
+      "get": {
+        "tags": [
+          "Cidade"
+        ],
+        "summary": "Endpoint responsável pela busca da cidade pelo estado",
+        "description": "",
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/cities": {
+      "post": {
+        "tags": [
+          "Cidade"
+        ],
+        "summary": "Endpoint responsável pela criação de um cidade",
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cliente": {
+      "type": "object",
+      "properties": {
+        "nomeCompleto": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "Ihago Santos"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "sexo": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "masculino, feminino ou outro"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "dataNascimento": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "1994-10-06"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "idade": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "number",
+              "example": 27
+            },
+            "type": {
+              "type": "string",
+              "example": "number"
+            }
+          }
+        },
+        "cidadeId": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "number",
+              "example": 2
+            },
+            "type": {
+              "type": "string",
+              "example": "number"
+            }
+          }
+        }
+      },
+      "required": [
+        "nomeCompleto",
+        "sexo",
+        "dataNascimento",
+        "idade",
+        "cidadeId"
+      ]
+    },
+    "Cidade": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "Garanhuns"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "estado": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "Pernambuco"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "estado"
+      ]
+    },
+    "ApiResponseError": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "TypeError"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "message": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "Erro ao cadastrar Cliente"
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        }
+      }
+    },
+    "ApiResponseSuccess": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Teste 2"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "São Paulo 2"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2021-10-12T19:47:47.374Z"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2021-10-12T19:47:47.374Z"
+                }
+              }
+            },
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "data"
+      ]
+    }
+  }
+}
