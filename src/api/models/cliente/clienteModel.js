@@ -1,13 +1,15 @@
-
+const cidadeValidator = require('../../validators/cidadeValidator');
+const CidadeModel = require('../../models/cidade/cidadeModel');
 class Cliente 
 {
-    constructor(nomeCompleto, sexo, dataNascimento, idade, cidade)
+    constructor(nomeCompleto, sexo, dataNascimento, idade, cidadeId)
     {
+        
         this.nomeCompleto = nomeCompleto;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.idade = idade;
-        this.cidade = cidade;
+        this.cidadeId = cidadeId;
     }
 
     getId()
@@ -55,13 +57,13 @@ class Cliente
         this.idade = idade;
     }
     
-    getCidade()
+    getCidadeId()
     {
-        return this.cidade;
+        return this.cidadeId;
     }
-    setCidade(cidade)
+    setCidadeId(cidadeId)
     {
-        this.cidade = cidade;
+        this.cidadeId = cidadeId;
     }
 
 }

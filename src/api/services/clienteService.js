@@ -1,8 +1,10 @@
-const ClienteValidator = require('../validators/clienteValidator');
-const clienteValidator = new ClienteValidator();
+const clienteValidator = require('../validators/clienteValidator');
+const cidadeValidator = require('../validators/cidadeValidator');
 const ClienteRepository = require('../repositories/clienteRepository');
+const CidadeRepository = require('../repositories/cidadeRepository');
 const { Op } = require("sequelize");
 const clienteConstants = require('../../constants/clienteConstants');
+const cidadeConstants = require('../../constants/cidadeConstants');
 const errorHelper = require('../../helpers/errorHelper');
 class ClienteService {
     
@@ -13,10 +15,19 @@ class ClienteService {
         clienteValidator.validarCliente(cliente);
 
         return new Promise((resolve, reject) => {
-            ClienteRepository.create(cliente)
-                .then(callback => resolve(callback))
+            CidadeRepository.find(cliente.cidadeId)
+                .then(cidade => {
+                    if(cidade){
+                        const cidadeId = cidade.dataValues.id;
+                        cliente.setCidadeId(cidadeId);
+                        ClienteRepository.create(cliente)
+                            .then(callback => resolve(callback))
+                            .catch(error => reject(error));
+                    }else{
+                        reject(errorHelper.notFoundError(cidadeConstants.error.cidadeNaoCadastrada));
+                    }
+                })
                 .catch(error => reject(error));
-
         });
 
     }

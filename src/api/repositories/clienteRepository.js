@@ -1,5 +1,6 @@
 const Cliente = require('../models/cliente/cliente');
 const clienteConstants = require('../../constants/clienteConstants');
+const Cidade = require('../models/cidade/cidade');
 class ClienteRepository {
 
     async create(cliente){
@@ -8,7 +9,8 @@ class ClienteRepository {
                 nomeCompleto: cliente.getNomeCompleto(),
                 sexo: cliente.getSexo(),
                 dataNascimento: cliente.getDataNascimento(),
-                idade: cliente.getIdade()
+                idade: cliente.getIdade(),
+                cidadeId: cliente.getCidadeId()
             };
             Cliente.create(data).then(callback => {
                 if(callback.dataValues){
@@ -19,13 +21,15 @@ class ClienteRepository {
             }).catch(error => {
                 reject(error);
             });
-
         });
     }
 
     async find(where){
         return new Promise((resolve, reject) => {
-            Cliente.findOne({ where })
+            Cliente.findOne({ where, include: {
+                model: Cidade,
+                required: true
+            } })
                 .then(callback => {
                     resolve(callback);
                 })
@@ -35,7 +39,10 @@ class ClienteRepository {
 
     async findAll(where){
         return new Promise((resolve, reject) => {
-            Cliente.findAll({ where })
+            Cliente.findAll({ where, include: {
+                model: Cidade,
+                required: true
+            } })
                 .then(callback => {
                     resolve(callback);
                 })

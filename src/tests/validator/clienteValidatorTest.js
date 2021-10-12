@@ -1,11 +1,9 @@
 const assert = require('assert');
-const ClienteValidator = require('../../api/validators/clienteValidator');
-let clienteValidator;
+const clienteValidator = require('../../api/validators/clienteValidator');
 let params;
 describe('Teste da classe ClienteValidator', function(){
     this.beforeAll(function(){
-        clienteValidator = new ClienteValidator();
-        
+
         params = {
             numero: 12,
             nomeCompletoValido: "Ihago Freire Santos",

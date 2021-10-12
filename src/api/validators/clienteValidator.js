@@ -11,8 +11,8 @@ class ClienteValidator extends Validator {
     validarCliente(cliente){
         this.validarNomeCompleto(cliente.nomeCompleto);
         this.validarSexo(cliente.sexo);
-        this.validarDataNascimento(cliente.dataNascimento)
-        this.validarIdade(cliente.idade)
+        this.validarDataNascimento(cliente.dataNascimento);
+        this.validarIdade(cliente.idade);
     }
 
     validarNomeCompleto(nomeCompleto){        
@@ -74,4 +74,4 @@ class ClienteValidator extends Validator {
     }
 }
 
-module.exports = ClienteValidator;
+module.exports = new ClienteValidator();

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
 const database = require('../../../../config/database');
+const Cidade = require('../cidade/cidade');
 
 const Cliente = database.define('cliente', {
     id: {
@@ -27,5 +28,8 @@ const Cliente = database.define('cliente', {
         allowNull: false,
     },
 });
+
+Cidade.hasOne(Cliente, { onDelete: 'cascade' });
+Cliente.belongsTo(Cidade);
 
 module.exports = Cliente;
