@@ -1,5 +1,6 @@
 const cidadeValidator = require('../validators/cidadeValidator');
 const CidadeRepository = require('../repositories/cidadeRepository');
+const cidadeConstants = require('../../constants/cidadeConstants');
 const { Op } = require("sequelize");
 class ClienteService {
     
@@ -9,8 +10,14 @@ class ClienteService {
         cidadeValidator.validarCidade(cidade);
         return new Promise((resolve, reject) => {
             CidadeRepository.create(cidade)
-                .then(callback => resolve(callback))
-                .catch(error => reject(error));
+                .then(callback => {
+                    
+                    resolve(callback)
+                })
+                .catch(error => {
+                    console.log(error)
+                    reject(new Error(cidadeConstants.error.erroCadastrarCidade))
+                });
         });
     }
 
