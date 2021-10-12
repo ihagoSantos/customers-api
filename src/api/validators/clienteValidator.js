@@ -65,6 +65,13 @@ class ClienteValidator extends Validator {
         if(!this.isValidInteger(idade))
             throw new TypeError(clienteConstants.error.idadeDeveSerInteiro);
     }
+
+    validarId(id){
+        if(!id)
+            throw new TypeError(clienteConstants.error.idDeveSerInteiro);
+        if(!this.isValidInteger(id))
+            throw new TypeError(clienteConstants.error.idDeveSerInteiro);
+    }
 }
 
 module.exports = ClienteValidator;

@@ -1,13 +1,14 @@
 module.exports = {
     retornaErroFormatado,
-    retornaCodigoDeErroPorInstancia
+    retornaCodigoDeErroPorInstancia,
+    notFoundError
 }
 
 function retornaErroFormatado(error){
     return {
         name: error.name,
         message: error.message,
-        code: retornaCodigoDeErroPorInstancia(error)
+        code: error.code || retornaCodigoDeErroPorInstancia(error)
     }
 }
 
@@ -16,4 +17,8 @@ function retornaCodigoDeErroPorInstancia(error){
         return 400;
 
     return 500;
+}
+
+function notFoundError(error){
+    throw { name: 'NotFoundError', message: error, code: 404 };
 }
