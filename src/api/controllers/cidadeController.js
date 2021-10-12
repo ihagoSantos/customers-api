@@ -4,6 +4,8 @@ const errorHelper = require('../../helpers/errorHelper');
 const cidadeConstants = require('../../constants/cidadeConstants');
 class CidadeController {
     async create(req, res){
+        // #swagger.tags = ['Cidade']
+        // #swagger.summary = 'Endpoint responsável pela criação de um cidade'
         try {
             let { nome, estado } = req.body;
             const cidade = new Cidade(nome, estado);
@@ -16,6 +18,8 @@ class CidadeController {
         }
     }
     async findByName(req, res){
+        // #swagger.tags = ['Cidade']
+        // #swagger.summary = 'Endpoint responsável pela busca da cidade pelo nome'
         try {
             const nome = req.params.nome;
             const response = await CidadeService.findByName(nome);
@@ -27,6 +31,8 @@ class CidadeController {
         }
     }
     async findByState(req, res){
+        // #swagger.tags = ['Cidade']
+        // #swagger.summary = 'Endpoint responsável pela busca da cidade pelo estado'
         try {
             const estado = req.params.estado;
             const response = await CidadeService.findByState(estado);

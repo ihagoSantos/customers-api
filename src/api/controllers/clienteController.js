@@ -7,6 +7,9 @@ class ClienteController
 {
     async create(req, res)
     {
+        // #swagger.tags = ['Cliente']
+        // #swagger.summary = 'Endpoint responsável pela criação de um cliente'
+        
         try {
             let { nomeCompleto, sexo, dataNascimento, idade, cidadeId } = req.body;
             const cliente = new Cliente(nomeCompleto, sexo, dataNascimento, idade, cidadeId);
@@ -20,6 +23,8 @@ class ClienteController
     }
     
     async findById(req, res){
+        // #swagger.tags = ['Cliente']
+        // #swagger.summary = 'Endpoint responsável pela busca do cliente pelo ID'
         try {
             const id = parseInt(req.params.id);
             const response = await ClienteService.findById(id);
@@ -31,6 +36,8 @@ class ClienteController
         }
     }
     async findByName(req, res){
+        // #swagger.tags = ['Cliente']
+        // #swagger.summary = 'Endpoint responsável pela busca do cliente pelo nome'
         try {
             const nome = req.params.nome;
             const response = await ClienteService.findByName(nome);
@@ -42,6 +49,8 @@ class ClienteController
         }
     }
     async edit(req, res){
+        // #swagger.tags = ['Cliente']
+        // #swagger.summary = 'Endpoint responsável pela edição do nome do cliente'
         try {
             const id = parseInt(req.params.id);
             const nomeCompleto = req.body.nome;
@@ -57,6 +66,8 @@ class ClienteController
     }
 
     async delete(req, res){
+        // #swagger.tags = ['Cliente']
+        // #swagger.summary = 'Endpoint responsável pela exclusão do cliente pelo id'
         try {
             const id = parseInt(req.params.id);
             const response = await ClienteService.delete(id);
